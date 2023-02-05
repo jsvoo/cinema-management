@@ -8,6 +8,12 @@ const users_route = require("./routes/users");
 const schedules_route = require("./routes/schedules")
 const categories_route = require("./routes/categories")
 const roles_route = require("./routes/roles")
+
+const ratings_route = require("./routes/ratings")
+const screens_route = require("./routes/screens")
+const verifications_route = require("./routes/verifications")
+const vendors_route = require("./routes/vendors")
+
 const { default: mongoose } = require("mongoose");
 require('dotenv').config();
 
@@ -26,6 +32,13 @@ app.use("/users", users_route)
 app.use("/schedules", schedules_route)
 app.use("/categories", categories_route)
 app.use("/roles", roles_route)
+
+
+app.use("/ratings", ratings_route)
+app.use("/screens", screens_route)
+app.use("/verifications", verifications_route)
+app.use("/vendors", vendors_route)
+
 
 
 const URI = process.env.MONGODB_LOCAL
