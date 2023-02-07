@@ -1,4 +1,4 @@
-const seatsModal = require('../models/seats')
+const seatsModal = require('../models/seat')
 
 // Get all Seats
 router.get("/seats", async (res,req) => {

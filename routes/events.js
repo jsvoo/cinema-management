@@ -1,4 +1,4 @@
-const eventsModal = require("../models/events")
+const eventsModal = require("../models/event")
 
 // Get all Events
 router.get("/events", async (res,req) => {

@@ -1,4 +1,4 @@
-const commentModal = require("../models/comments")
+const commentModal = require("../models/comment")
 
 
 // Get all Comments
