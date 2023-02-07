@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // const homeModel = require('../models/home_page_models')
-const ratings = require('../models/ratings')
+const ratings = require('../models/rating')
 
 
 
