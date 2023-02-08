@@ -4,33 +4,44 @@ const router = express.Router()
 
 
 // Get all Admins
-router.get("/admins", async (req, res) => {
+router.get("/", async (req, res) => {
     let admins = await adminModel.find().lean()
     res.send(admins)
 })
 
 // Update Admin
-router.get("/admins/:id", async (req, res) => {
-    let body = JSON.parse(JSON.stringify(req.body));
-    let { id } = body
-    await adminModel.updateOne({_id: id}, body)
-    .then(async () => {
-        let newAdmin = await adminModel.findOne({ _id: id})
-        res.send({ success: true, data: newAdmin})
-    }).catch((err) => {
-        res.send(err)
+router.put("/:id", async (req,res) => {
+    await adminModel.updateOne({_id:req.params.id}, req.body)
+    .then( async ()=>{
+     const admin = await adminModel.findOne({_id: req.params.id})
+     res.send(admin) 
     })
 })
 
+
+// router.get("/admins/:id", async (req, res) => {
+//     let body = JSON.parse(JSON.stringify(req.body));
+//     let { id } = body
+//     await adminModel.updateOne({_id: id}, body)
+//     .then(async () => {
+//         let newAdmin = await adminModel.findOne({ _id: id})
+//         res.send({ success: true, data: newAdmin})
+//     }).catch((err) => {
+//         res.send(err)
+//     })
+// })
+
+
+
 // Delete Admin
-router.get("/admins/:id", async (req,res) => {
+router.delete("/:id", async (req,res) => {
     await adminModel.deleteOne({ _id: req.params.id })
     res.send({ success: "admin removed"})
 })
 
 // Create Admin
-router.post("/admins", async (req, res) => {
-    let admin = await eventsModal.create(req.body)
+router.post("/", async (req, res) => {
+    let admin = await adminModel.create(req.body)
     res.send(admin)
 })
 
@@ -54,8 +65,8 @@ router.post("/admins", async (req, res) => {
 
 // Get One Admin
 
-router.get("/admins/:id", async (req, res) => {
-    const admin = await adminModel.findOne(req.params.id)
+router.get("/:id", async (req, res) => {
+    const admin = await adminModel.findOne({_id: req.params.id})
     res.send(admin)
 })
 
