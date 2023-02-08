@@ -40,7 +40,6 @@ router.get("/vendor/user", async (req, res) => {
 })
 
 //CREATE A USER
-
 router.post("/create", async (req, res) => {
 
     const veri_code = Math.floor(100000 + Math.random() * 900000)
