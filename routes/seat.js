@@ -1,13 +1,16 @@
 const seatsModal = require('../models/seat')
 
+const express = require("express")
+const router = express.Router()
+
 // Get all Seats
-router.get("/seats", async (res,req) => {
+router.get("/seats", async (req,res) => {
     let seats = await seatsModal.find().lean()
     res.send(seats)
 })
 
 // Update Seats
-router.get("/seats", async (res,req) => {
+router.get("/seats", async (req,res) => {
     let body = JSON.parse(JSON.stringify(req.body));
     let { id } = body
     await seatsModal.updateOne({_id: id}, body)
@@ -26,13 +29,13 @@ router.get("/seats/:id", async (req,res) => {
 })
 
 // Create Seat
-router.post("/seats", async (res,req) => {
+router.post("/seats", async (req,res) => {
     let event = await eventsModal.create(req.body)
     res.send(event)
 })
 
 // Get One Event
-router.get("/seats/:id", async (res,req) => {
+router.get("/seats/:id", async (req,res) => {
     const seat = await seatsModal.findOne(req.params.id)
     res.send(seat)
 })

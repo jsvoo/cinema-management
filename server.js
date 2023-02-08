@@ -8,8 +8,12 @@ const users_route = require("./routes/user");
 const schedules_route = require("./routes/schedule")
 const categories_route = require("./routes/category")
 const roles_route = require("./routes/role")
+
 const events_route = require("./routes/event")
 const comments_route = require("./routes/comment")
+const admins_route = require("./routes/admin")
+const seats_route = require("./routes/seat")
+
 const { default: mongoose } = require("mongoose");
 require('dotenv').config();
  
@@ -31,6 +35,8 @@ app.use("/roles", roles_route)
 
 app.use("/events", events_route)
 app.use("/comments", comments_route)
+app.use("/admins", admins_route)
+app.use("/seats", seats_route)
 
 
 const URI = process.env.MONGODB_LOCAL

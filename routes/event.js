@@ -4,13 +4,13 @@ const router = express.Router()
 const eventsModel = require("../models/event")
 
 // Get all Events
-router.get("/", async (res,req) => {
+router.get("/", async (req,res) => {
     let events = await eventsModel.find().lean()
     res.send(events)
 })
 
 // Update Event
-router.get("/", async (res,req) => {
+router.get("/", async (req,res) => {
     let body = JSON.parse(JSON.stringify(req.body));
     let { id } = body
     await eventsModal.updateOne({_id: id}, body)
@@ -29,7 +29,7 @@ router.get("/:id", async (req,res) => {
 })
 
 // Create Event
-router.post("/", async (res, req) => {
+router.post("/", async (req, res) => {
     console.log(req.body)
     let event = await eventsModel.create(req.body)
     res.send(event)
@@ -38,7 +38,7 @@ router.post("/", async (res, req) => {
 })
 
 // Get One Event
-router.get("/events/:id", async (res,req) => {
+router.get("/events/:id", async (req,res) => {
     const event = await eventsModel.findOne(req.params.id)
     res.send(event)
 })
