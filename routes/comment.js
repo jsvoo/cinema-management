@@ -1,19 +1,35 @@
-const commentModal = require("../models/comment")
+const commentModel = require("../models/comment")
+const express = require("express")
+const router = express.Router()
+
+
+
+
+// Create Comment
+router.post("/", async (req, res) => {
+    console.log(req.body)
+    let event = await commentModel.create(req.body)
+    res.send(event) 
+    // console.log(req.body)
+    // req.send(req.body)
+
+    // res.send("seeing")  
+})
 
 
 // Get all Comments
-router.get("/comments", async (res,req) => {
-    let events = await commentModal.find().lean()
+router.get("/", async (res,req) => {
+    let events = await commentModel.find().lean()
     res.send(events)
-})
+}) 
 
 // Update Comment
-router.get("/updateComment/:id", async (res,req) => {
+router.get("/comments", async (res,req) => {
     let body = JSON.parse(JSON.stringify(req.body));
     let { id } = body
-    await commentModal.updateOne({_id: id}, body)
+    await commentModel.updateOne({_id: id}, body)
     .then(async () => {
-        let newComent = await commentModal.findOne({ _id: id})
+        let newComent = await commentModel.findOne({ _id: id})
         res.send({ success: true, data: newComent})
     }).catch((err) => {
         res.send(err)
@@ -21,19 +37,18 @@ router.get("/updateComment/:id", async (res,req) => {
 })
 
 // Delete Comment
-router.get("/removeComment/:id", async (req,res) => {
-    await commentModal.deleteOne({ _id: req.params.id })
+router.get("/comments/:id", async (req,res) => {
+    await commentModel.deleteOne({ _id: req.params.id })
     res.send({ success: "comment removed"})
 })
 
-// Create Comment
-router.post("/postComment", async (res,req) => {
-    let event = await commentModal.create(req.body)
-    res.send(event)
-})
 
 // Get One Commnet
 router.get("/comments/:id", async (res,req) => {
-    const comment = await commentModal.findOne(req.params.id)
+    const comment = await commentModel.findOne(req.params.id)
     res.send(comment)
 })
+
+
+
+module.exports = router

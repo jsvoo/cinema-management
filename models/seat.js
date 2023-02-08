@@ -28,5 +28,5 @@ const seatSchema = new mongoose.Schema({
 })
 
 
-const seatsModal = mongoose.modal("seats", seatSchema)
-module.exports = seatsModal
+const seatsModel = mongoose.model("seats", seatSchema)
+module.exports = seatsModel

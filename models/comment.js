@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+// const commentModel = require("../models/c")
 
 const commentSchema = new mongoose.Schema({
     date:{
@@ -23,5 +24,5 @@ const commentSchema = new mongoose.Schema({
     }
 })
 
-const commentModal = mongoose.modal("comments", commentSchema)
-module.exports = commentModal
+const commentModel = mongoose.model("comments", commentSchema)
+module.exports = commentModel

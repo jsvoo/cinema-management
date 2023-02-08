@@ -8,9 +8,11 @@ const users_route = require("./routes/users");
 const schedules_route = require("./routes/schedules")
 const categories_route = require("./routes/categories")
 const roles_route = require("./routes/roles")
+const events_route = require("./routes/event")
+const comments_route = require("./routes/comment")
 const { default: mongoose } = require("mongoose");
 require('dotenv').config();
-
+ 
 app.use(bodyParser.json())
 app.use(express.urlencoded({extended:true}))
 app.use(express.static( path.join(__dirname, "public")))
@@ -26,6 +28,9 @@ app.use("/users", users_route)
 app.use("/schedules", schedules_route)
 app.use("/categories", categories_route)
 app.use("/roles", roles_route)
+
+app.use("/events", events_route)
+app.use("/comments", comments_route)
 
 
 const URI = process.env.MONGODB_LOCAL

@@ -1,18 +1,21 @@
-const eventsModal = require("../models/event")
+const express = require("express")
+const router = express.Router()
+
+const eventsModel = require("../models/event")
 
 // Get all Events
-router.get("/events", async (res,req) => {
-    let events = await eventsModal.find().lean()
+router.get("/", async (res,req) => {
+    let events = await eventsModel.find().lean()
     res.send(events)
 })
 
 // Update Event
-router.get("/updateEvent/:id", async (res,req) => {
+router.get("/", async (res,req) => {
     let body = JSON.parse(JSON.stringify(req.body));
     let { id } = body
     await eventsModal.updateOne({_id: id}, body)
     .then(async () => {
-        let newEvent = await eventsModal.findOne({ _id: id})
+        let newEvent = await eventsModel.findOne({ _id: id})
         res.send({ success: true, data: newEvent})
     }).catch((err) => {
         res.send(err)
@@ -20,19 +23,26 @@ router.get("/updateEvent/:id", async (res,req) => {
 })
 
 // Delete Event
-router.get("/removeEvent/:id", async (req,res) => {
-    await eventsModal.deleteOne({ _id: req.params.id })
+router.get("/:id", async (req,res) => {
+    await eventsModel.deleteOne({ _id: req.params.id })
     res.send({ success: "event removed"})
 })
 
 // Create Event
-router.post("/postEvent", async (res,req) => {
-    let event = await eventsModal.create(req.body)
+router.post("/", async (res, req) => {
+    console.log(req.body)
+    let event = await eventsModel.create(req.body)
     res.send(event)
+    // req.send("Seeing")
+
 })
 
 // Get One Event
 router.get("/events/:id", async (res,req) => {
-    const event = await eventsModal.findOne(req.params.id)
+    const event = await eventsModel.findOne(req.params.id)
     res.send(event)
 })
+
+
+
+module.exports = router

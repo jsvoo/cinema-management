@@ -15,5 +15,5 @@ const eventSchema = new mongoose.Schema({
     }
 })
 
-const eventsModal = mongoose.modal("events", eventSchema)
-module.exports = eventsModal
+const eventsModel = mongoose.model("events", eventSchema)
+module.exports = eventsModel

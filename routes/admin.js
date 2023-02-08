@@ -1,4 +1,6 @@
 const adminModel = require("../models/admin")
+const express = require("express")
+const router = express.Router()
 
 
 // Get all Admins
@@ -8,7 +10,7 @@ router.get("/admins", async (res,req) => {
 })
 
 // Update Admin
-router.get("/updateAdmins/:id", async (res,req) => {
+router.get("/admins/:id", async (res,req) => {
     let body = JSON.parse(JSON.stringify(req.body));
     let { id } = body
     await adminModel.updateOne({_id: id}, body)
@@ -21,13 +23,13 @@ router.get("/updateAdmins/:id", async (res,req) => {
 })
 
 // Delete Admin
-router.get("/removeAdmin/:id", async (req,res) => {
+router.get("/admins/:id", async (req,res) => {
     await adminModel.deleteOne({ _id: req.params.id })
     res.send({ success: "admin removed"})
 })
 
 // Create Admin
-router.post("/postAdmin", async (res,req) => {
+router.post("/admins", async (res,req) => {
     let admin = await eventsModal.create(req.body)
     res.send(admin)
 })
@@ -51,7 +53,11 @@ router.post("/postAdmin", async (res,req) => {
 
 
 // Get One Admin
-router.get("/admin/:id", async (res,req) => {
+
+router.get("/admins/:id", async (res,req) => {
     const admin = await adminModel.findOne(req.params.id)
     res.send(admin)
 })
+
+
+module.exports = router
